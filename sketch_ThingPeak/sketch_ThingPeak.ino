@@ -44,7 +44,7 @@ void setup() {
   //Encabezado para el archivo del Serial Data Logger
   //Escribir SOLO si no se ha escrito antes
   if (!encabezadoEscrito) {
-    SerialLogger.println("Fecha,Hora,F1;F2;F3;F4;F5;F6;F7;F8");
+    SerialLogger.println("Fecha;Hora;F1;F2;F3;F4;F5;F6;F7;F8");
     encabezadoEscrito = true;  //Marcar que ya se escribió
   }
 
