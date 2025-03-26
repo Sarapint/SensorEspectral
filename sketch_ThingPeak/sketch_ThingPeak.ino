@@ -11,6 +11,7 @@ int ledPin = 13;              //Pin para el LED
 int buttonPin = D7;           //Conexión botón al pin 3
 
 #define SerialLogger Serial2  //Usamos Serial2 para el Data Logger
+RTC_DATA_ATTR bool encabezadoEscrito = false; //Variable persistente para verificar si el encabezado se ha escrito
 
 const char* ssid = " --- ";              //Nombre de la red Wi-Fi
 const char* password = "****";           //Contraseña de la red Wi-Fi
@@ -40,8 +41,12 @@ void setup() {
 
   pinMode(buttonPin, INPUT);     //Declarar botón como input
 
-  //Imprimir encabezado para el archivo en el Serial Data Logger
-  SerialLogger.println("Fecha,Hora,F1;F2;F3;F4;F5;F6;F7;F8");
+  //Encabezado para el archivo del Serial Data Logger
+  //Escribir SOLO si no se ha escrito antes
+  if (!encabezadoEscrito) {
+    SerialLogger.println("Fecha,Hora,F1;F2;F3;F4;F5;F6;F7;F8");
+    encabezadoEscrito = true;  //Marcar que ya se escribió
+  }
 
   //Conectar a Wi-Fi
   WiFi.begin(ssid, password);
